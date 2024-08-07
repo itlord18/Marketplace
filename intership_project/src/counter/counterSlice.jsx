@@ -15,22 +15,13 @@ const counterSlice = createSlice({
         },
         addAmount: (state, action) => {
             state.value += action.payload
-            console.log("Add Amount .")
         },
         addAsync: (state, action) => {
-            
             state.value += action.payload
-            
-            console.log("Add Async .")
         },
         addOdd: (state, action) => {
-            if(action.payload % 2 == 1){
+            if(action.payload % 2 === 1){
                 state.value += action.payload
-                console.log("Value is odd .")
-            }
-            else{
-                state.value += 0;
-                console.log("Value is even .")
             }
         },
     }
