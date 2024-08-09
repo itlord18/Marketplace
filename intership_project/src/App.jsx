@@ -1,12 +1,16 @@
-import './App.css'
-import { Counter } from './counter/counter'
+//import { Counter } from './counter/counter'<Counter />
+import { Shop } from './shop/shop'
+
 
 function App() {
   
+  
   return (
     
-      <div className='App'>
-        <Counter />
+      <div>
+        
+        <Shop />
+        
       </div>
     
   );
