@@ -3,6 +3,7 @@ import { FaShoppingBasket, FaHome } from 'react-icons/fa';
 import { useProducts } from './useProducts';
 import { useBasket } from './useBasket';
 import { ProductCard } from './productCard';
+import { BasketProductCard } from './basketProductCard';
 import { ProductDetails } from './productDetails';
 import { BasketDetails } from './basketDetails';
 import { useState } from 'react'
@@ -68,7 +69,7 @@ export function Shop() {
                 <b>Basket</b>
                 {isBasketVisible ? (
                     basketProducts.length > 0 ? basketProducts.map(item => (
-                        <ProductCard key={item.id} product={item} onSelect={selectBasketProduct} />
+                        <BasketProductCard key={item.id} product={item} onSelect={selectBasketProduct} />
                     )) : <p>Your basket is empty.</p>
                 ) : null}
             </div>

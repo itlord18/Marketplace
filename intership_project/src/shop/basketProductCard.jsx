@@ -1,9 +1,9 @@
-export function ProductCard({ product, onSelect }) {
+export function BasketProductCard({ product, onSelect }) {
 
     const id = product.id
     const title = product.title
     const price = product.price
-    const inventory = product.inventory
+    const quantity = product.quantity
     
     return (
         <div className='card' onClick={() => onSelect(id)}>
@@ -11,7 +11,7 @@ export function ProductCard({ product, onSelect }) {
             <div className='cardInfo'>
                 <h4>{title}</h4><br />
                 <p>Price: {price}<br />
-                Inventory: {inventory}</p>
+                Quantity: {quantity}</p>
             </div>
         </div>
     );

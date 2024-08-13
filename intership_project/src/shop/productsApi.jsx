@@ -16,18 +16,18 @@ export const productsApi = createApi({
                   : [{ type: 'products', id: 'LIST' }],
         }),
         getProduct: build.query({
-            query: (id) => `products/${id}`,
+            query: (id) => `/products/${id}`,
         }),
         addBasketProduct: build.mutation({
             query: (body) => ({
-                url: `basket`,
+                url: `/basket`,
                 method: `POST`,
                 body,
             }),
             invalidatesTags: [{type: `basket`, id: `LIST`}],
         }),
         getBasketProducts: build.query({
-            query: () => `basket`,
+            query: () => `/basket`,
             providesTags: (result) => result
                   ? [
                       ...result.map(({ id }) => ({ type: 'basket', id })),
@@ -36,11 +36,11 @@ export const productsApi = createApi({
                   : [{ type: 'basket', id: 'LIST' }],
         }),
         getBasketProduct: build.query({
-            query: (id) => `basket/${id}`,
+            query: (id) => `/basket/${id}`,
         }),
         updateBasketProduct: build.mutation({
             query: (body) => ({
-                url: `basket`,
+                url: `/basket`,
                 method: `PUT`,
                 body,
             }),
