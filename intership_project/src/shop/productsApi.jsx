@@ -1,13 +1,13 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-
+const baseUrl = import.meta.env.VITE_REACT_APP_API_BASE_URL;
 
 export const productsApi = createApi({
     reducerPath: `productsApi`,
     tagTypes: [`products`,'basket'],
-    baseQuery: fetchBaseQuery({baseUrl: `http://localhost:3001/`}),
+    baseQuery: fetchBaseQuery({ baseUrl }),
     endpoints: (build) => ({
         getProducts: build.query({
-            query: () => `products`,
+            query: () => `/products`,
             providesTags: (result) => result
                   ? [
                       ...result.map(({ id }) => ({ type: 'products', id })),
@@ -17,7 +17,6 @@ export const productsApi = createApi({
         }),
         getProduct: build.query({
             query: (id) => `products/${id}`,
-            invalidatesTags: [{type: `products`, id: `LIST`}],
         }),
         addBasketProduct: build.mutation({
             query: (body) => ({
@@ -38,7 +37,6 @@ export const productsApi = createApi({
         }),
         getBasketProduct: build.query({
             query: (id) => `basket/${id}`,
-            invalidatesTags: [{type: `basket`, id: `LIST`}],
         }),
         updateBasketProduct: build.mutation({
             query: (body) => ({
