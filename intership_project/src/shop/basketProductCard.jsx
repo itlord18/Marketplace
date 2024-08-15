@@ -1,9 +1,6 @@
 export function BasketProductCard({ product, onSelect }) {
 
-    const id = product.id
-    const title = product.title
-    const price = product.price
-    const quantity = product.quantity
+    const {id, title, price, quantity} = product
     
     return (
         <div className='card' onClick={() => onSelect(id)}>

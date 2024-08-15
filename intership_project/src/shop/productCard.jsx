@@ -1,10 +1,7 @@
 export function ProductCard({ product, onSelect }) {
 
-    const id = product.id
-    const title = product.title
-    const price = product.price
-    const inventory = product.inventory
-    
+    const {id, title, price, inventory} = product
+
     return (
         <div className='card' onClick={() => onSelect(id)}>
             <div className='cardImage'></div>
