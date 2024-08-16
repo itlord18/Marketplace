@@ -1,6 +1,7 @@
-export function ProductDetails({ product, quantity, onQuantityChange, onAddToBasket, isInBasket }) {
-
-    const {id, title, price, inventory, color} = product
+export function BasketDetails({ basketProduct, productForBasket, quantity, onQuantityChange, onUpdateBasket }) {
+ 
+    const {id, title} = basketProduct
+    const {price, inventory, color} = productForBasket
     const orderPrice = parseFloat(quantity * price).toFixed(2)
 
     return (
@@ -13,11 +14,9 @@ export function ProductDetails({ product, quantity, onQuantityChange, onAddToBas
                 Inventory: {inventory}<br />
                 Color: {color}</p>
                 Your order:<br />
-                Quantity: <input type="number" value={quantity} min="1" max={inventory} onChange={onQuantityChange}/><br />
+                Quantity: <input type="number" value={quantity} min="1" max={inventory} onChange={onQuantityChange} /><br />
                 Price: {orderPrice} <br />
-                {isInBasket ? 
-                    <p style={{color: "red", fontSize: 32}}>You have this product in the basket</p> : 
-                    <button onClick={onAddToBasket}>Add to Basket</button>}
+                <button onClick={() => onUpdateBasket(id, title, orderPrice, quantity, color)}>Change order</button>
             </div>
         </div>
         </div>

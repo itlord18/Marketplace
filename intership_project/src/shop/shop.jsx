@@ -1,24 +1,43 @@
 import './shop.css';
 import { FaShoppingBasket, FaHome } from 'react-icons/fa';
+import { useState, useEffect } from 'react';
 import { useProducts } from './useProducts';
 import { useBasket } from './useBasket';
+import { useFilters } from './useFilters';
 import { ProductCard } from './productCard';
 import { BasketProductCard } from './basketProductCard';
 import { ProductDetails } from './productDetails';
-import { BasketDetails } from './basketDetails';
-import { useState } from 'react'
+import { BasketDetails } from './basketProductDetails';
+import { Filters } from './filters';
+
 
 export function Shop() {
-    const { products, productData, selectedProductId, selectProduct } = useProducts();
-    const { basketProducts, basketProductData, selectedBasketProductId, selectBasketProduct, addToBasket, updateBasket } = useBasket();
-    const [quantity, setQuantity] = useState(1);
+    const {
+        setSelectedColors, 
+        setSelectedTypes, 
+        sort, 
+        setSort, 
+        querySum, 
+        handleColorChange, 
+        handleTypeChange
+    } = useFilters();
+    
+    const { products, productData, selectedProductId, setSelectedProductId,selectProduct, productsColors, productsTypes } = useProducts();
+    const { basketData, basketProductData, productDataForBasket, quantity, selectedBasketProductId, handleAddToBasket, handleUpdateBasket, handleGetBasketProduct, setSelectedBasketProductId, setQuantity } = useBasket();
     const [isBasketVisible, setIsBasketVisible] = useState(false);
 
-    const isProductInBasket = basketProducts.some(item => item.id === selectedProductId);
+    const isProductInBasket = basketData.some(item => item.id === selectedProductId);
+
+    useEffect(() => {
+        if (selectedBasketProductId) {
+            
+            setSelectedProductId(null);
+        }
+    }, [selectedBasketProductId]);
 
     const handleQuantityChange = (e) => {
         const value = parseInt(e.target.value);
-        if (value >= 1 && value <= productData.inventory) {
+        if (value >= 1 && value <= ( selectedProductId ? productData.inventory : productDataForBasket.inventory)) {
             setQuantity(value);
         }
     };
@@ -29,12 +48,16 @@ export function Shop() {
 
     const handleHomeClick = () => {
         selectProduct(null);
-        selectBasketProduct(null);
+        setSelectedBasketProductId(null);
         setQuantity(1);
+        setSelectedTypes([]);
+        setSelectedColors([]);
+        setSort('');
+        setSelectedColors([]);
+        setSelectedTypes([]);
+        setSort('');
+        querySum();
     };
-    
-
-    
 
     return (
         <div className="container">
@@ -43,33 +66,49 @@ export function Shop() {
                 <FaShoppingBasket className="basket-icon" onClick={toggleBasketVisibility} />
             </div>
             <div className="menu"></div>
-            
-            <div className={selectedProductId || selectedBasketProductId ? "single-product" : "content"}>
-                {!selectedProductId && !selectedBasketProductId ?  (
-                     products.map(item => (
-                        <ProductCard key={item.id} product={item} onSelect={selectProduct} />
-                    ))
-                ) : selectedProductId ? (
-                    <ProductDetails
-                        product={productData}
-                        quantity={quantity}
-                        onQuantityChange={handleQuantityChange}
-                        onAddToBasket={() => addToBasket({ id: productData.id, title: productData.title, price: parseFloat(quantity * productData.price).toFixed(2), quantity })}
-                        isInBasket={isProductInBasket}
+
+            {!selectedProductId && !selectedBasketProductId ? (
+                <div className="content">
+                    <Filters
+                        sort={sort}
+                        setSort={setSort}
+                        productsColors={productsColors}
+                        productsTypes={productsTypes}
+                        handleColorChange={handleColorChange}
+                        handleTypeChange={handleTypeChange}
+                        querySum={querySum}
                     />
-                ): (
-                    <BasketDetails
-                    basketProduct={basketProductData}
-                    onUpdateBasket={() => updateBasket({ id: basketProductData.id, title: basketProductData.title, price: basketProductData.price, quantity: basketProductData.quantity })}
+                    
+                    <div className='products'>
+                        {products.map(item => (
+                            <ProductCard key={item.id} product={item} onSelect={selectProduct} />
+                        ))}
+                    </div>
+                </div>
+            ) : selectedProductId ? (
+                <ProductDetails
+                    product={productData}
+                    quantity={quantity}
+                    onQuantityChange={handleQuantityChange}
+                    onAddToBasket={() => handleAddToBasket(productData.id, productData.title, parseFloat(quantity * productData.price).toFixed(2), quantity, productData.color)}
+                    isInBasket={isProductInBasket}
                 />
-                )}
-            </div>
-            
+
+            ) : (
+                <BasketDetails
+                    basketProduct={basketProductData}
+                    productForBasket={productDataForBasket}
+                    quantity={quantity}
+                    onQuantityChange={handleQuantityChange}
+                    onUpdateBasket={handleUpdateBasket}
+                />
+            )}
+
             <div className="basket" style={isBasketVisible ? {backgroundColor: "aquamarine"} : {backgroundColor: "white"}}>
                 <b>Basket</b>
                 {isBasketVisible ? (
-                    basketProducts.length > 0 ? basketProducts.map(item => (
-                        <BasketProductCard key={item.id} product={item} onSelect={selectBasketProduct} />
+                    basketData.length > 0 ? basketData.map(item => (
+                        <BasketProductCard key={item.id} product={item} handleGetBasketProduct={handleGetBasketProduct} />
                     )) : <p>Your basket is empty.</p>
                 ) : null}
             </div>

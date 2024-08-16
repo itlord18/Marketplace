@@ -1,25 +1,64 @@
-import { useGetBasketProductsQuery, useGetBasketProductQuery, useAddBasketProductMutation, useUpdateBasketProductMutation } from './productsApi';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useGetBasketProductsQuery, useGetBasketProductQuery, useAddBasketProductMutation, useUpdateBasketProductMutation, useGetProductQuery } from './productsApi';
 
 export function useBasket() {
-    const { data: basketProducts = [] } = useGetBasketProductsQuery();
     const [selectedBasketProductId, setSelectedBasketProductId] = useState(null);
-    const { data: basketProductData = {} } = useGetBasketProductQuery(selectedBasketProductId, {
-        skip: !selectedBasketProductId 
+    const [quantity, setQuantity] = useState(1);
+    const [addProduct] = useAddBasketProductMutation();
+    const [updateProduct] = useUpdateBasketProductMutation();
+    const { data: basketData = [] } = useGetBasketProductsQuery();
+    const { data: basketProductData = [] } = useGetBasketProductQuery(selectedBasketProductId, {
+        skip: !selectedBasketProductId
     });
-    const [addProductToBasket] = useAddBasketProductMutation();
-    const [updateProductInBasket] = useUpdateBasketProductMutation();
+    const [selectedProductIdForBasket, setSelectedProductIdForBasket] = useState(null);
+    const { data: productDataForBasket = [] } = useGetProductQuery(selectedProductIdForBasket, {
+        skip: !selectedProductIdForBasket
+    });
+
+    useEffect(() => {
+        if (selectedBasketProductId && basketProductData.quantity) {
+            setQuantity(basketProductData.quantity);
+        }
+    }, [basketProductData, selectedBasketProductId]);
+
+    const handleAddToBasket = async (id, title, price, quantity, color) => {
+        await addProduct({
+            id,
+            title,
+            price,
+            quantity,
+            color
+        });
+        setQuantity(1);
+    };
+
+    const handleUpdateBasket = async (id, title, price, quantity, color) => {
+        await updateProduct({
+            id,
+            title,
+            price,
+            quantity,
+            color
+        });
+    };
+
+    const handleGetBasketProduct = async (id) => {
+        setSelectedBasketProductId(id);
+        setSelectedProductIdForBasket(id);
+    };
+
     
-    const selectBasketProduct = (id) => setSelectedBasketProductId(id);
-    const addToBasket = (product) => addProductToBasket(product);
-    const updateBasket = (product) => updateProductInBasket(product);
 
     return {
-        basketProducts,
+        basketData,
         basketProductData,
         selectedBasketProductId,
-        selectBasketProduct,
-        addToBasket,
-        updateBasket,
+        productDataForBasket,
+        quantity,
+        setQuantity,
+        handleAddToBasket,
+        handleUpdateBasket,
+        handleGetBasketProduct,
+        setSelectedBasketProductId
     };
 }
