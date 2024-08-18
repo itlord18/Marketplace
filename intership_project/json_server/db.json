@@ -1,0 +1,196 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "title": "iPad 4 Mini",
+      "price": 500.01,
+      "inventory": 2,
+      "type": "Electronics",
+      "color": "Black"
+    },
+    {
+      "id": "2",
+      "title": "H&M T-Shirt White",
+      "price": 10.99,
+      "inventory": 10,
+      "type": "Clothing",
+      "color": "White"
+    },
+    {
+      "id": "3",
+      "title": "Charli XCX - Sucker CD",
+      "price": 19.99,
+      "inventory": 5,
+      "type": "Music",
+      "color": "Pink"
+    },
+    {
+      "id": "4",
+      "title": "Samsung Galaxy S21",
+      "price": 799.99,
+      "inventory": 4,
+      "type": "Electronics",
+      "color": "Gray"
+    },
+    {
+      "id": "5",
+      "title": "Nike Air Max 270",
+      "price": 150,
+      "inventory": 8,
+      "type": "Footwear",
+      "color": "Black"
+    },
+    {
+      "id": "6",
+      "title": "Sony WH-1000XM4 Headphones",
+      "price": 349.99,
+      "inventory": 6,
+      "type": "Electronics",
+      "color": "Silver"
+    },
+    {
+      "id": "7",
+      "title": "The Alchemist - Book",
+      "price": 9.99,
+      "inventory": 12,
+      "type": "Books",
+      "color": "Yellow"
+    },
+    {
+      "id": "8",
+      "title": "Dell XPS 13 Laptop",
+      "price": 999.99,
+      "inventory": 3,
+      "type": "Electronics",
+      "color": "White"
+    },
+    {
+      "id": "9",
+      "title": "Apple Watch Series 6",
+      "price": 429,
+      "inventory": 7,
+      "type": "Electronics",
+      "color": "Red"
+    },
+    {
+      "id": "10",
+      "title": "Bose SoundLink Revolve Speaker",
+      "price": 199.99,
+      "inventory": 5,
+      "type": "Electronics",
+      "color": "Black"
+    },
+    {
+      "id": "11",
+      "title": "Canon EOS R5 Camera",
+      "price": 3899,
+      "inventory": 1,
+      "type": "Electronics",
+      "color": "Black"
+    },
+    {
+      "id": "12",
+      "title": "Adidas Ultraboost 21",
+      "price": 180,
+      "inventory": 10,
+      "type": "Footwear",
+      "color": "Blue"
+    },
+    {
+      "id": "13",
+      "title": "HP Envy 13 Laptop",
+      "price": 1199.99,
+      "inventory": 4,
+      "type": "Electronics",
+      "color": "Silver"
+    },
+    {
+      "id": "14",
+      "title": "Logitech MX Master 3 Mouse",
+      "price": 99.99,
+      "inventory": 15,
+      "type": "Electronics",
+      "color": "Black"
+    },
+    {
+      "id": "15",
+      "title": "JBL Flip 5 Speaker",
+      "price": 119.95,
+      "inventory": 7,
+      "type": "Electronics",
+      "color": "Red"
+    },
+    {
+      "id": "16",
+      "title": "Fjallraven Kanken Backpack",
+      "price": 80,
+      "inventory": 9,
+      "type": "Accessories",
+      "color": "Green"
+    },
+    {
+      "id": "17",
+      "title": "Asus ROG Strix G15 Laptop",
+      "price": 1399.99,
+      "inventory": 2,
+      "type": "Electronics",
+      "color": "Black"
+    },
+    {
+      "id": "18",
+      "title": "Kindle Paperwhite",
+      "price": 129.99,
+      "inventory": 20,
+      "type": "Electronics",
+      "color": "Black"
+    },
+    {
+      "id": "19",
+      "title": "Samsung 970 EVO Plus SSD",
+      "price": 149.99,
+      "inventory": 11,
+      "type": "Electronics",
+      "color": "Black"
+    },
+    {
+      "id": "20",
+      "title": "GoPro HERO9 Black",
+      "price": 399.99,
+      "inventory": 5,
+      "type": "Electronics",
+      "color": "Black"
+    },
+    {
+      "id": "21",
+      "title": "Sony PlayStation 5",
+      "price": 499.99,
+      "inventory": 0,
+      "type": "Electronics",
+      "color": "White"
+    },
+    {
+      "id": "22",
+      "title": "Microsoft Surface Pro 7",
+      "price": 749.99,
+      "inventory": 6,
+      "type": "Electronics",
+      "color": "Black"
+    }
+  ],
+  "basket": [
+    {
+      "title": "Sony WH-1000XM4 Headphones",
+      "price": "1049.97",
+      "quantity": 3,
+      "color": "Silver",
+      "id": "6"
+    },
+    {
+      "title": "Charli XCX - Sucker CD",
+      "price": "59.97",
+      "quantity": 3,
+      "color": "Pink",
+      "id": "3"
+    }
+  ]
+}
