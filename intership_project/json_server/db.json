@@ -191,6 +191,13 @@
       "quantity": 3,
       "color": "Pink",
       "id": "3"
+    },
+    {
+      "title": "iPad 4 Mini",
+      "price": "500.01",
+      "quantity": 1,
+      "color": "Black",
+      "id": "1"
     }
   ]
 }

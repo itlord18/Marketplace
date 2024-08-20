@@ -9,9 +9,13 @@ import { BasketProductCard } from './basketProductCard';
 import { ProductDetails } from './productDetails';
 import { BasketDetails } from './basketProductDetails';
 import { Filters } from './filters';
-
+import { useSelector, useDispatch } from 'react-redux'; 
+import { setQuantity, resetQuantity } from '../store/quantitySlice';
 
 export function Shop() {
+    const dispatch = useDispatch();
+    const quantity = useSelector((state) => state.quantity.quantity);
+
     const {
         setSelectedColors, 
         setSelectedTypes, 
@@ -22,39 +26,40 @@ export function Shop() {
         handleTypeChange
     } = useFilters();
     
-    const { products, productData, selectedProductId, setSelectedProductId,selectProduct, productsColors, productsTypes } = useProducts();
-    const { basketData, basketProductData, productDataForBasket, quantity, selectedBasketProductId, handleAddToBasket, handleUpdateBasket, handleGetBasketProduct, setSelectedBasketProductId, setQuantity } = useBasket();
+    const { products, productData, selectedProductId, setSelectedProductId, selectProduct, productsColors, productsTypes } = useProducts();
+    const { basketData, basketProductData, productDataForBasket, selectedBasketProductId, handleAddToBasket, handleUpdateBasket, handleGetBasketProduct, setSelectedBasketProductId } = useBasket();
     const [isBasketVisible, setIsBasketVisible] = useState(false);
 
     const isProductInBasket = basketData.some(item => item.id === selectedProductId);
 
     useEffect(() => {
         if (selectedBasketProductId) {
-            
             setSelectedProductId(null);
         }
     }, [selectedBasketProductId]);
 
+    const inventory = selectedProductId ? productData.inventory : productDataForBasket.inventory;
+    
     const handleQuantityChange = (e) => {
         const value = parseInt(e.target.value);
-        if (value >= 1 && value <= ( selectedProductId ? productData.inventory : productDataForBasket.inventory)) {
-            setQuantity(value);
+        if (value >= 1 && value <= inventory) {
+            dispatch(setQuantity(value));
         }
     };
 
     const toggleBasketVisibility = () => {
         setIsBasketVisible(!isBasketVisible);
+        if (!isBasketVisible) {
+            dispatch(resetQuantity()); 
+        }
     };
 
     const handleHomeClick = () => {
         selectProduct(null);
         setSelectedBasketProductId(null);
-        setQuantity(1);
+        dispatch(resetQuantity());  
         setSelectedTypes([]);
         setSelectedColors([]);
-        setSort('');
-        setSelectedColors([]);
-        setSelectedTypes([]);
         setSort('');
         querySum();
     };

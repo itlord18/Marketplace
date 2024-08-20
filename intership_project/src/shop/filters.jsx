@@ -1,3 +1,5 @@
+import { Colors } from './colors'
+import { Types } from './types'
 export function Filters({ sort, setSort, productsColors, productsTypes, selectedColors, handleColorChange, selectedTypes, handleTypeChange, querySum }) {
     return (
         <div className='filters'>
@@ -10,32 +12,13 @@ export function Filters({ sort, setSort, productsColors, productsTypes, selected
             
             Color:
             {productsColors.map((color, index) => (
-                <label key={index}>
-                    <input 
-                        type="checkbox" 
-                        id={color} 
-                        name={color} 
-                        value={color}  
-                        checked={selectedColors} 
-                        onChange={() => handleColorChange(color)} 
-                    /> 
-                    {color}
-                </label>
+                <Colors key={index} color={color} handleColorChange={handleColorChange} selectedColors={selectedColors}/>
             ))}
+            
 
             Type:
             {productsTypes.map((type, index) => (
-                <label key={index}>
-                    <input 
-                        type="checkbox" 
-                        id={type} 
-                        name={type} 
-                        value={type} 
-                        checked={selectedTypes} 
-                        onChange={() => handleTypeChange(type)} 
-                    /> 
-                    {type}
-                </label>
+               <Types key={index} type={type} handleTypeChange={handleTypeChange} selectedTypes={selectedTypes}/>
             ))}
 
             <button onClick={querySum}>Use Filters</button>

@@ -1,6 +1,8 @@
 import { useGetProductsQuery, useGetProductQuery } from './productsApi';
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux'; 
+import { resetQuantity } from '../store/quantitySlice';
 
 export function useProducts() {
     
@@ -18,7 +20,12 @@ export function useProducts() {
         skip: !selectedProductId 
     });
 
-    const selectProduct = (id) => setSelectedProductId(id);
+    const dispatch = useDispatch()
+
+    const selectProduct = (id) => {
+        setSelectedProductId(id);
+        dispatch(resetQuantity());
+    }
 
     const productsColors = Array.from(new Set(products.map((x) => x.color).sort()));
     const productsTypes = Array.from(new Set(products.map((x) => x.type).sort()));
