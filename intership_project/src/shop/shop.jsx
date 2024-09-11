@@ -11,6 +11,8 @@ import { BasketDetails } from './basketProductDetails';
 import { Filters } from './filters';
 import { useSelector, useDispatch } from 'react-redux'; 
 import { setQuantity, resetQuantity } from '../store/quantitySlice';
+import { Pagination } from "./pagination";
+import { Header } from "./header";
 
 export function Shop() {
     const dispatch = useDispatch();
@@ -40,12 +42,13 @@ export function Shop() {
 
     const inventory = selectedProductId ? productData.inventory : productDataForBasket.inventory;
     
-    const handleQuantityChange = (e) => {
-        const value = parseInt(e.target.value);
+    const handleQuantityChange = ( valueAsNumber ) => {
+        const value = valueAsNumber || 1;
         if (value >= 1 && value <= inventory) {
             dispatch(setQuantity(value));
         }
     };
+    
 
     const toggleBasketVisibility = () => {
         setIsBasketVisible(!isBasketVisible);
@@ -64,12 +67,26 @@ export function Shop() {
         querySum();
     };
 
+    const itemsPerPage = 3;  
+    const [currentPage, setCurrentPage] = useState(1);
+    const totalPages = Math.ceil(products.length / itemsPerPage);
+
+    const currentProducts = products.slice(
+        (currentPage - 1) * itemsPerPage,
+        currentPage * itemsPerPage
+    );
+
     return (
         <div className="container">
-            <div className="header">
+            
+            <Header 
+                homeLink={handleHomeClick}
+                basketLink={toggleBasketVisibility}
+            />
                 <FaHome className="home-icon" onClick={handleHomeClick} />
+                
                 <FaShoppingBasket className="basket-icon" onClick={toggleBasketVisibility} />
-            </div>
+            
             <div className="menu"></div>
 
             {!selectedProductId && !selectedBasketProductId ? (
@@ -85,10 +102,16 @@ export function Shop() {
                     />
                     
                     <div className='products'>
-                        {products.map(item => (
+                        {currentProducts.map(item => (
                             <ProductCard key={item.id} product={item} onSelect={selectProduct} />
                         ))}
+                        <Pagination
+                            currentPage={currentPage}
+                            totalPages={totalPages}
+                            onPageChange={setCurrentPage}
+                        />
                     </div>
+                    
                 </div>
             ) : selectedProductId ? (
                 <ProductDetails

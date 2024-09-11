@@ -1,3 +1,5 @@
+import {Button, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper } from '@chakra-ui/react'
+
 export function ProductDetails({ product, quantity, onQuantityChange, onAddToBasket, isInBasket }) {
     
     const { id, title, price, inventory, color } = product;
@@ -13,11 +15,23 @@ export function ProductDetails({ product, quantity, onQuantityChange, onAddToBas
                     Inventory: {inventory}<br />
                     Color: {color}</p>
                     Your order:<br />
-                    Quantity: <input type="number" value={quantity} min="1" max={inventory} onChange={onQuantityChange} /><br />
+                    Quantity: 
+                    <NumberInput step={1} value={quantity} min="1" max={inventory} onChange={onQuantityChange} size='md' w='md'>
+                        <NumberInputField />
+                        <NumberInputStepper>
+                            <NumberIncrementStepper />
+                            <NumberDecrementStepper />
+                        </NumberInputStepper>
+                    </NumberInput>
+                    <br />
                     Price: {orderPrice} <br />
                     {isInBasket ? 
                         <p style={{color: "red", fontSize: 32}}>You have this product in the basket</p> : 
-                        <button onClick={onAddToBasket}>Add to Basket</button>}
+                        
+                        <Button variant='solid' colorScheme='blue' onClick={onAddToBasket}>
+                            Add to basket
+                        </Button>
+                    }
                 </div>
             </div>
         </div>

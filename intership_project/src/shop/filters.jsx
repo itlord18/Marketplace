@@ -1,5 +1,6 @@
 import { Colors } from './colors'
 import { Types } from './types'
+import { Button } from '@chakra-ui/react';
 export function Filters({ sort, setSort, productsColors, productsTypes, selectedColors, handleColorChange, selectedTypes, handleTypeChange, querySum }) {
     return (
         <div className='filters'>
@@ -21,7 +22,7 @@ export function Filters({ sort, setSort, productsColors, productsTypes, selected
                <Types key={index} type={type} handleTypeChange={handleTypeChange} selectedTypes={selectedTypes}/>
             ))}
 
-            <button onClick={querySum}>Use Filters</button>
+            <Button onClick={querySum} bg='blue.500' color='white' _hover={{bg:'blue.300'}}>Use Filters</Button>
         </div>
     );
 }
