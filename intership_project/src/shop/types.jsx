@@ -1,5 +1,5 @@
 export function Types({ type, index, handleTypeChange, selectedTypes }) {
-
+    
     return (
         <label key={index}>
             <input 
@@ -7,7 +7,7 @@ export function Types({ type, index, handleTypeChange, selectedTypes }) {
                 id={type} 
                 name={type} 
                 value={type} 
-                checked={selectedTypes} 
+                checked={selectedTypes.includes(type)} 
                 onChange={() => handleTypeChange(type)} 
                 /> 
             {type}

@@ -179,25 +179,25 @@
   ],
   "basket": [
     {
-      "title": "Sony WH-1000XM4 Headphones",
-      "price": "1049.97",
-      "quantity": 3,
-      "color": "Silver",
-      "id": "6"
-    },
-    {
-      "title": "Charli XCX - Sucker CD",
-      "price": "59.97",
-      "quantity": 3,
-      "color": "Pink",
-      "id": "3"
-    },
-    {
+      "id": "2",
       "title": "H&M T-Shirt White",
-      "price": "87.92",
-      "quantity": "8",
-      "color": "White",
-      "id": "2"
+      "price": "65.94",
+      "quantity": "6",
+      "color": "White"
+    },
+    {
+      "id": "15",
+      "title": "JBL Flip 5 Speaker",
+      "price": "359.85",
+      "quantity": "3",
+      "color": "Red"
+    },
+    {
+      "id": "13",
+      "title": "HP Envy 13 Laptop",
+      "price": "2399.98",
+      "quantity": "2",
+      "color": "Silver"
     }
   ]
 }

@@ -1,44 +1,92 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 export function useFilters() {
     const [selectedColors, setSelectedColors] = useState([]);
     const [selectedTypes, setSelectedTypes] = useState([]);
     const [sort, setSort] = useState('');
     const [query, setQuery] = useState('');
+    const itemsPerPage = 3;
+    const [currentPage, setCurrentPage] = useState(1);
 
     const navigate = useNavigate();
-    
+    const location = useLocation();
 
-    const handleColorChange = (color) => {
-        setSelectedColors((prevColors) =>
-            prevColors.includes(color) ? prevColors.filter((c) => c !== color) : [...prevColors, color]
-        );
-    };
+    useEffect(() => {
+        const params = new URLSearchParams(location.search);
 
-    const handleTypeChange = (type) => {
-        setSelectedTypes((prevTypes) =>
-            prevTypes.includes(type) ? prevTypes.filter((t) => t !== type) : [...prevTypes, type]
-        );
-    };
+        const page = parseInt(params.get('page')) || 1;
+        setCurrentPage(page);
 
-    const querySum = () => {
+        const colors = params.get('color_like');
+        if (colors) {
+            setSelectedColors(colors.split('|'));
+        }
+
+        const types = params.get('type_like');
+        if (types) {
+            setSelectedTypes(types.split('|'));
+        }
+
+        const orderParam = params.get('_order');
+        const sortParam = params.get('_sort');
+        if (sortParam) {
+            setSort('_sort='+ sortParam + '&_order=' + orderParam);
+        }
+
+    }, [location.search]);
+
+    useEffect(() => {
         let prevQuery = '';
 
         if (selectedTypes.length > 0) {
-            prevQuery += `type=${selectedTypes.join('&type=')}&`;
+            prevQuery += `type_like=${selectedTypes.join('|')}&`;
         }
-    
+
         if (selectedColors.length > 0) {
-            prevQuery += `color=${selectedColors.join('&color=')}&`;
+            prevQuery += `color_like=${selectedColors.join('|')}&`;
         }
 
         if (sort) {
             prevQuery += `${sort}&`;
         }
 
-        setQuery(prevQuery.slice(0, -1));
-        navigate({ search: prevQuery.slice(0, -1) });
+        if (currentPage > 1) {
+            prevQuery += `page=${currentPage}&`;
+        }
+
+        prevQuery = prevQuery.slice(0, -1);
+
+        if (prevQuery !== query) {
+            setQuery(prevQuery);
+            navigate({ search: prevQuery });
+        }
+    }, [selectedColors, selectedTypes, sort, currentPage, query, navigate]);
+
+    const handlePageChange = (page) => {
+        if (page !== currentPage) {
+            setCurrentPage(page);
+        }
+    };
+
+    const handleColorChange = (color) => {
+        setSelectedColors((prevColors) => {
+            const updatedColors = prevColors.includes(color)
+                ? prevColors.filter((c) => c !== color)
+                : [...prevColors, color];
+            return updatedColors;
+        });
+        setCurrentPage(1);
+    };
+
+    const handleTypeChange = (type) => {
+        setSelectedTypes((prevTypes) => {
+            const updatedTypes = prevTypes.includes(type)
+                ? prevTypes.filter((t) => t !== type)
+                : [...prevTypes, type];
+            return updatedTypes;
+        });
+        setCurrentPage(1);
     };
 
     return {
@@ -49,8 +97,10 @@ export function useFilters() {
         sort,
         query,
         setSort,
-        querySum,
         handleColorChange,
-        handleTypeChange
+        handleTypeChange,
+        currentPage,
+        itemsPerPage,
+        handlePageChange,
     };
 }

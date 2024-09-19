@@ -25,11 +25,16 @@ export function Shop() {
         setSort, 
         querySum, 
         handleColorChange, 
-        handleTypeChange
+        handleTypeChange,
+        currentPage,
+        itemsPerPage,
+        handlePageChange,
+        selectedColors,
+        selectedTypes
     } = useFilters();
     
     const { products, productData, selectedProductId, setSelectedProductId, selectProduct, productsColors, productsTypes } = useProducts();
-    const { basketData, basketProductData, productDataForBasket, selectedBasketProductId, handleAddToBasket, handleUpdateBasket, handleGetBasketProduct, setSelectedBasketProductId } = useBasket();
+    const { basketData, basketProductData, productDataForBasket, selectedBasketProductId, handleAddToBasket, handleUpdateBasket, handleGetBasketProduct, setSelectedBasketProductId, handleDeleteProduct } = useBasket();
     const [isBasketVisible, setIsBasketVisible] = useState(false);
 
     const isProductInBasket = basketData.some(item => item.id === selectedProductId);
@@ -66,9 +71,8 @@ export function Shop() {
         setSort('');
         querySum();
     };
-
-    const itemsPerPage = 3;  
-    const [currentPage, setCurrentPage] = useState(1);
+    
+    
     const totalPages = Math.ceil(products.length / itemsPerPage);
 
     const currentProducts = products.slice(
@@ -96,6 +100,8 @@ export function Shop() {
                         setSort={setSort}
                         productsColors={productsColors}
                         productsTypes={productsTypes}
+                        selectedColors={selectedColors}
+                        selectedTypes={selectedTypes}
                         handleColorChange={handleColorChange}
                         handleTypeChange={handleTypeChange}
                         querySum={querySum}
@@ -108,7 +114,7 @@ export function Shop() {
                         <Pagination
                             currentPage={currentPage}
                             totalPages={totalPages}
-                            onPageChange={setCurrentPage}
+                            onPageChange={handlePageChange}
                         />
                     </div>
                     
@@ -129,15 +135,15 @@ export function Shop() {
                     quantity={quantity}
                     onQuantityChange={handleQuantityChange}
                     onUpdateBasket={handleUpdateBasket}
+                    onDeleteProduct={handleDeleteProduct}
                 />
             )}
 
             <div className="basket" style={isBasketVisible ? {backgroundColor: "aquamarine"} : {backgroundColor: "white"}}>
-                <b>Basket</b>
                 {isBasketVisible ? (
                     basketData.length > 0 ? basketData.map(item => (
-                        <BasketProductCard key={item.id} product={item} handleGetBasketProduct={handleGetBasketProduct} />
-                    )) : <p>Your basket is empty.</p>
+                        <BasketProductCard key={item.id} product={item} handleGetBasketProduct={handleGetBasketProduct} onDeleteProduct={handleDeleteProduct}/>
+                    )) : <p></p>
                 ) : null}
             </div>
             <div className="footer"></div>

@@ -1,6 +1,6 @@
-import {Button, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper } from '@chakra-ui/react'
+import {Button, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, HStack } from '@chakra-ui/react'
 
-export function BasketDetails({ basketProduct, productForBasket, quantity, onQuantityChange, onUpdateBasket }) {
+export function BasketDetails({ basketProduct, productForBasket, quantity, onQuantityChange, onUpdateBasket, onDeleteProduct }) {
  
     const {id, title} = basketProduct
     const {price, inventory, color} = productForBasket
@@ -26,9 +26,14 @@ export function BasketDetails({ basketProduct, productForBasket, quantity, onQua
                     </NumberInput>
                 <br />
                 Price: {orderPrice} <br />
-                <Button variant='solid' colorScheme='blue' onClick={() => onUpdateBasket(id, title, orderPrice, quantity, color)}>
-                        Change order
-                </Button>
+                <HStack >
+                    <Button variant='solid' colorScheme='blue' onClick={() => onUpdateBasket(id, title, orderPrice, quantity, color)}>
+                            Change order
+                    </Button>
+                    <Button variant='solid' colorScheme='red' onClick={() => onDeleteProduct(id)}>
+                            Delete Product
+                    </Button>
+                </HStack>
                     
             </div>
         </div>

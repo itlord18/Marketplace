@@ -71,6 +71,8 @@
     color: black;
     align-content: flex-start; 
     padding: 5px 10px;
+    height: 705px;
+    overflow-y: auto;
 }
 .footer {
     
@@ -132,6 +134,7 @@
     justify-content: center;
     align-items: center;
     padding: 10px;
+    height: 705px;
 }
 
 .cardDetails {
