@@ -1,24 +1,32 @@
 import { Button } from "@chakra-ui/react";
 
-export function usePagination() {
-    
-    const handlePrevPage = (currentPage,onPageChange) => {
+
+export function usePrevPage(currentPage, onPageChange) {
+    const handlePrevPage = () => {
         if (currentPage > 1) {
             onPageChange(currentPage - 1);
         }
     };
 
-    const handleNextPage = (currentPage, totalPages, onPageChange ) => {
+    return handlePrevPage;
+}
+
+export function useNextPage(currentPage, totalPages, onPageChange) {
+    const handleNextPage = () => {
         if (currentPage < totalPages) {
             onPageChange(currentPage + 1);
         }
     };
 
-    const renderPageNumbers = (currentPage, totalPages, onPageChange) => {
+    return handleNextPage;
+}
+
+
+export function useRenderPageNumbers(currentPage, totalPages, onPageChange) {
+    const renderPageNumbers = () => {
         const pageNumbers = [];
-        
-        const startPage = Math.max(currentPage - 2, 1); 
-        const endPage = Math.min(currentPage + 5, totalPages); 
+        const startPage = Math.max(currentPage - 2, 1);
+        const endPage = Math.min(currentPage + 5, totalPages);
 
         if (startPage > 1) {
             pageNumbers.push(
@@ -71,9 +79,5 @@ export function usePagination() {
         return pageNumbers;
     };
 
-    return {
-        handleNextPage,
-        handlePrevPage,
-        renderPageNumbers
-    };
+    return renderPageNumbers;
 }
