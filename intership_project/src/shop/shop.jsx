@@ -22,11 +22,10 @@ export function Shop() {
         setSelectedColors, 
         setSelectedTypes, 
         sort, 
-        setSort, 
-        querySum, 
-        handleColorChange, 
-        handleTypeChange,
+        setSort,
+        handleElementChange,
         currentPage,
+        setCurrentPage,
         itemsPerPage,
         handlePageChange,
         selectedColors,
@@ -69,7 +68,8 @@ export function Shop() {
         setSelectedTypes([]);
         setSelectedColors([]);
         setSort('');
-        querySum();
+        setCurrentPage(1);
+        
     };
     
     
@@ -102,9 +102,8 @@ export function Shop() {
                         productsTypes={productsTypes}
                         selectedColors={selectedColors}
                         selectedTypes={selectedTypes}
-                        handleColorChange={handleColorChange}
-                        handleTypeChange={handleTypeChange}
-                        querySum={querySum}
+                        handleColorChange={(color) => handleElementChange(color, setSelectedColors)}
+                        handleTypeChange={(type) => handleElementChange(type, setSelectedTypes)}
                     />
                     
                     <div className='products'>

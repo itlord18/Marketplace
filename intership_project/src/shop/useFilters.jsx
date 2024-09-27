@@ -69,22 +69,14 @@ export function useFilters() {
         }
     };
 
-    const handleColorChange = (color) => {
-        setSelectedColors((prevColors) => {
-            const updatedColors = prevColors.includes(color)
-                ? prevColors.filter((c) => c !== color)
-                : [...prevColors, color];
-            return updatedColors;
-        });
-        setCurrentPage(1);
-    };
 
-    const handleTypeChange = (type) => {
-        setSelectedTypes((prevTypes) => {
-            const updatedTypes = prevTypes.includes(type)
-                ? prevTypes.filter((t) => t !== type)
-                : [...prevTypes, type];
-            return updatedTypes;
+
+    const handleElementChange = (element, setState) => {
+        setState((prevElements) => {
+            const updatedElements = prevElements.includes(element)
+                ? prevElements.filter((e) => e !== element)
+                : [...prevElements, element];
+            return updatedElements;
         });
         setCurrentPage(1);
     };
@@ -97,10 +89,10 @@ export function useFilters() {
         sort,
         query,
         setSort,
-        handleColorChange,
-        handleTypeChange,
         currentPage,
+        setCurrentPage,
         itemsPerPage,
         handlePageChange,
+        handleElementChange,
     };
 }

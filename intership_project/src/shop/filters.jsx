@@ -2,7 +2,7 @@ import { Colors } from './colors';
 import { Types } from './types';
 import { Button, Select } from '@chakra-ui/react';
 
-export function Filters({ sort, setSort, productsColors, productsTypes, selectedColors, handleColorChange, selectedTypes, handleTypeChange, querySum }) {
+export function Filters({ sort, setSort, productsColors, productsTypes, selectedColors, handleColorChange, selectedTypes, handleTypeChange }) {
     return (
         <div className='filters'>
             Sorting: 
