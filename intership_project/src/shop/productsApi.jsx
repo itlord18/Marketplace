@@ -49,7 +49,14 @@ export const productsApi = createApi({
             }),
             invalidatesTags: [{type: `basket`, id: `LIST`}],
         }),
+        deleteBasketProduct: build.mutation({
+            query: (id) => ({
+                url: `/basket/${id}`,
+                method: `DELETE`,
+            }),
+            invalidatesTags: [{type: `basket`, id: `LIST`}],
+        }),
     }),
 });
 
-export const { useGetProductsQuery, useAddBasketProductMutation , useGetProductQuery, useGetBasketProductsQuery, useGetBasketProductQuery, useUpdateBasketProductMutation} = productsApi;
+export const { useGetProductsQuery, useAddBasketProductMutation , useGetProductQuery, useGetBasketProductsQuery, useGetBasketProductQuery, useUpdateBasketProductMutation, useDeleteBasketProductMutation} = productsApi;

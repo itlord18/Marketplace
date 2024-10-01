@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useGetBasketProductsQuery, useGetBasketProductQuery, useAddBasketProductMutation, useUpdateBasketProductMutation, useGetProductQuery } from './productsApi';
+import { useGetBasketProductsQuery, useGetBasketProductQuery, useAddBasketProductMutation, useUpdateBasketProductMutation, useGetProductQuery, useDeleteBasketProductMutation } from './productsApi';
 import { useSelector, useDispatch } from 'react-redux';
 import { setQuantity, resetQuantity } from '../store/quantitySlice';
 
@@ -11,6 +11,7 @@ export function useBasket() {
     const [selectedBasketProductId, setSelectedBasketProductId] = useState(null);
     const [addProduct] = useAddBasketProductMutation();
     const [updateProduct] = useUpdateBasketProductMutation();
+    const [deleteProduct] = useDeleteBasketProductMutation();
     
     const { data: basketData = [] } = useGetBasketProductsQuery();
     const { data: basketProductData = [] } = useGetBasketProductQuery(selectedBasketProductId, {
@@ -58,6 +59,10 @@ export function useBasket() {
         dispatch(setQuantity(newQuantity));
     };
 
+    const handleDeleteProduct = async(id) => {
+        await deleteProduct(id);
+    }
+
     return {
         basketData,
         basketProductData,
@@ -68,6 +73,7 @@ export function useBasket() {
         handleAddToBasket,
         handleUpdateBasket,
         handleGetBasketProduct,
-        setSelectedBasketProductId
+        setSelectedBasketProductId,
+        handleDeleteProduct
     };
 }

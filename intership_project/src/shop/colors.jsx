@@ -7,7 +7,7 @@ export function Colors({ color, index, handleColorChange, selectedColors }) {
             id={color} 
             name={color} 
             value={color}  
-            checked={selectedColors} 
+            checked={selectedColors.includes(color)} 
             onChange={() => handleColorChange(color)} 
         /> 
         {color}

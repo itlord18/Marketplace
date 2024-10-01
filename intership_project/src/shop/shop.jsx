@@ -11,6 +11,8 @@ import { BasketDetails } from './basketProductDetails';
 import { Filters } from './filters';
 import { useSelector, useDispatch } from 'react-redux'; 
 import { setQuantity, resetQuantity } from '../store/quantitySlice';
+import { Pagination } from "./pagination";
+import { Header } from "./header";
 
 export function Shop() {
     const dispatch = useDispatch();
@@ -20,14 +22,18 @@ export function Shop() {
         setSelectedColors, 
         setSelectedTypes, 
         sort, 
-        setSort, 
-        querySum, 
-        handleColorChange, 
-        handleTypeChange
+        setSort,
+        handleElementChange,
+        currentPage,
+        setCurrentPage,
+        itemsPerPage,
+        handlePageChange,
+        selectedColors,
+        selectedTypes
     } = useFilters();
     
     const { products, productData, selectedProductId, setSelectedProductId, selectProduct, productsColors, productsTypes } = useProducts();
-    const { basketData, basketProductData, productDataForBasket, selectedBasketProductId, handleAddToBasket, handleUpdateBasket, handleGetBasketProduct, setSelectedBasketProductId } = useBasket();
+    const { basketData, basketProductData, productDataForBasket, selectedBasketProductId, handleAddToBasket, handleUpdateBasket, handleGetBasketProduct, setSelectedBasketProductId, handleDeleteProduct } = useBasket();
     const [isBasketVisible, setIsBasketVisible] = useState(false);
 
     const isProductInBasket = basketData.some(item => item.id === selectedProductId);
@@ -40,12 +46,13 @@ export function Shop() {
 
     const inventory = selectedProductId ? productData.inventory : productDataForBasket.inventory;
     
-    const handleQuantityChange = (e) => {
-        const value = parseInt(e.target.value);
+    const handleQuantityChange = ( valueAsNumber ) => {
+        const value = valueAsNumber || 1;
         if (value >= 1 && value <= inventory) {
             dispatch(setQuantity(value));
         }
     };
+    
 
     const toggleBasketVisibility = () => {
         setIsBasketVisible(!isBasketVisible);
@@ -61,15 +68,29 @@ export function Shop() {
         setSelectedTypes([]);
         setSelectedColors([]);
         setSort('');
-        querySum();
+        setCurrentPage(1);
+        
     };
+    
+    
+    const totalPages = Math.ceil(products.length / itemsPerPage);
+
+    const currentProducts = products.slice(
+        (currentPage - 1) * itemsPerPage,
+        currentPage * itemsPerPage
+    );
 
     return (
         <div className="container">
-            <div className="header">
+            
+            <Header 
+                homeLink={handleHomeClick}
+                basketLink={toggleBasketVisibility}
+            />
                 <FaHome className="home-icon" onClick={handleHomeClick} />
+                
                 <FaShoppingBasket className="basket-icon" onClick={toggleBasketVisibility} />
-            </div>
+            
             <div className="menu"></div>
 
             {!selectedProductId && !selectedBasketProductId ? (
@@ -79,16 +100,23 @@ export function Shop() {
                         setSort={setSort}
                         productsColors={productsColors}
                         productsTypes={productsTypes}
-                        handleColorChange={handleColorChange}
-                        handleTypeChange={handleTypeChange}
-                        querySum={querySum}
+                        selectedColors={selectedColors}
+                        selectedTypes={selectedTypes}
+                        handleColorChange={(color) => handleElementChange(color, setSelectedColors)}
+                        handleTypeChange={(type) => handleElementChange(type, setSelectedTypes)}
                     />
                     
                     <div className='products'>
-                        {products.map(item => (
+                        {currentProducts.map(item => (
                             <ProductCard key={item.id} product={item} onSelect={selectProduct} />
                         ))}
+                        <Pagination
+                            currentPage={currentPage}
+                            totalPages={totalPages}
+                            onPageChange={handlePageChange}
+                        />
                     </div>
+                    
                 </div>
             ) : selectedProductId ? (
                 <ProductDetails
@@ -106,15 +134,15 @@ export function Shop() {
                     quantity={quantity}
                     onQuantityChange={handleQuantityChange}
                     onUpdateBasket={handleUpdateBasket}
+                    onDeleteProduct={handleDeleteProduct}
                 />
             )}
 
             <div className="basket" style={isBasketVisible ? {backgroundColor: "aquamarine"} : {backgroundColor: "white"}}>
-                <b>Basket</b>
                 {isBasketVisible ? (
                     basketData.length > 0 ? basketData.map(item => (
-                        <BasketProductCard key={item.id} product={item} handleGetBasketProduct={handleGetBasketProduct} />
-                    )) : <p>Your basket is empty.</p>
+                        <BasketProductCard key={item.id} product={item} handleGetBasketProduct={handleGetBasketProduct} onDeleteProduct={handleDeleteProduct}/>
+                    )) : <p></p>
                 ) : null}
             </div>
             <div className="footer"></div>
