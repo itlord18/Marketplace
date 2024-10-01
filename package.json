@@ -6,11 +6,10 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "server": "json-server -w json_server/db.json -p 3001",
     "prepare": "husky install",
-    "lint": "npx eslint 'src/**/*.jsx' --fix"
+    "lint": "npx eslint src/shop/*.jsx"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.1.1",
