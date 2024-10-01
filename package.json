@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "server": "json-server -w json_server/db.json -p 3001",
     "prepare": "husky install",
-    "lint": "npx eslint src/shop/*.jsx"
+    "lint": "npx eslint src/shop/*.jsx --fix"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.1.1",
