@@ -1,10 +1,11 @@
-import {Button, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, HStack } from '@chakra-ui/react'
+import { Button, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, HStack } from '@chakra-ui/react'
+import React from 'react';
 
-export function BasketDetails({ basketProduct, productForBasket, quantity, onQuantityChange, onUpdateBasket, onDeleteProduct }) {
+export function BasketDetails( { basketProduct, productForBasket, quantity, onQuantityChange, onUpdateBasket, onDeleteProduct } ) {
  
-    const {id, title} = basketProduct
-    const {price, inventory, color} = productForBasket
-    const orderPrice = parseFloat(quantity * price).toFixed(2)
+    const { id, title } = basketProduct
+    const { price, inventory, color } = productForBasket
+    const orderPrice = parseFloat( quantity * price ).toFixed( 2 )
 
     return (
         <div className="single-product">
@@ -27,10 +28,10 @@ export function BasketDetails({ basketProduct, productForBasket, quantity, onQua
                 <br />
                 Price: {orderPrice} <br />
                 <HStack >
-                    <Button variant='solid' colorScheme='blue' onClick={() => onUpdateBasket(id, title, orderPrice, quantity, color)}>
+                    <Button variant='solid' colorScheme='blue' onClick={() => onUpdateBasket( id, title, orderPrice, quantity, color )}>
                             Change order
                     </Button>
-                    <Button variant='solid' colorScheme='red' onClick={() => onDeleteProduct(id)}>
+                    <Button variant='solid' colorScheme='red' onClick={() => onDeleteProduct( id )}>
                             Delete Product
                     </Button>
                 </HStack>

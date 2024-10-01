@@ -6,61 +6,61 @@ import { setQuantity, resetQuantity } from '../store/quantitySlice';
 export function useBasket() {
     const dispatch = useDispatch();
     
-    const quantity = useSelector((state) => state.quantity.value);
+    const quantity = useSelector( ( state ) => state.quantity.value );
     
-    const [selectedBasketProductId, setSelectedBasketProductId] = useState(null);
-    const [addProduct] = useAddBasketProductMutation();
-    const [updateProduct] = useUpdateBasketProductMutation();
-    const [deleteProduct] = useDeleteBasketProductMutation();
+    const [ selectedBasketProductId, setSelectedBasketProductId ] = useState( null );
+    const [ addProduct ] = useAddBasketProductMutation();
+    const [ updateProduct ] = useUpdateBasketProductMutation();
+    const [ deleteProduct ] = useDeleteBasketProductMutation();
     
     const { data: basketData = [] } = useGetBasketProductsQuery();
-    const { data: basketProductData = [] } = useGetBasketProductQuery(selectedBasketProductId, {
+    const { data: basketProductData = [] } = useGetBasketProductQuery( selectedBasketProductId, {
         skip: !selectedBasketProductId
-    });
+    } );
     
-    const [selectedProductIdForBasket, setSelectedProductIdForBasket] = useState(null);
-    const { data: productDataForBasket = [] } = useGetProductQuery(selectedProductIdForBasket, {
+    const [ selectedProductIdForBasket, setSelectedProductIdForBasket ] = useState( null );
+    const { data: productDataForBasket = [] } = useGetProductQuery( selectedProductIdForBasket, {
         skip: !selectedProductIdForBasket
-    });
+    } );
 
-    useEffect(() => {
-        if (selectedBasketProductId && basketProductData.quantity) {
-            dispatch(setQuantity(basketProductData.quantity));
+    useEffect( () => {
+        if ( selectedBasketProductId && basketProductData.quantity ) {
+            dispatch( setQuantity( basketProductData.quantity ) );
         }
-    }, [basketProductData, selectedBasketProductId, dispatch]);
+    }, [ basketProductData, selectedBasketProductId, dispatch ] );
 
-    const handleAddToBasket = async (id, title, price, quantity, color) => {
-        await addProduct({
+    const handleAddToBasket = async ( id, title, price, quantity, color ) => {
+        await addProduct( {
             id,
             title,
             price,
             quantity,
             color
-        });
-        dispatch(resetQuantity());
+        } );
+        dispatch( resetQuantity() );
     };
 
-    const handleUpdateBasket = async (id, title, price, quantity, color) => {
-        await updateProduct({
+    const handleUpdateBasket = async ( id, title, price, quantity, color ) => {
+        await updateProduct( {
             id,
             title,
             price,
             quantity,
             color
-        });
+        } );
     };
 
-    const handleGetBasketProduct = async (id) => {
-        setSelectedBasketProductId(id);
-        setSelectedProductIdForBasket(id);
+    const handleGetBasketProduct = async ( id ) => {
+        setSelectedBasketProductId( id );
+        setSelectedProductIdForBasket( id );
     };
 
-    const handleQuantityChange = (newQuantity) => {
-        dispatch(setQuantity(newQuantity));
+    const handleQuantityChange = ( newQuantity ) => {
+        dispatch( setQuantity( newQuantity ) );
     };
 
-    const handleDeleteProduct = async(id) => {
-        await deleteProduct(id);
+    const handleDeleteProduct = async( id ) => {
+        await deleteProduct( id );
     }
 
     return {

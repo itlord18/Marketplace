@@ -1,12 +1,13 @@
 import { HStack, IconButton } from "@chakra-ui/react";
 import { ArrowForwardIcon, ArrowBackIcon } from "@chakra-ui/icons";
-import {handlePrevPage, handleNextPage, handleRenderPageNumbers} from './paginateFunc'
+import { handlePrevPage, handleNextPage, handleRenderPageNumbers } from './paginateFunc'
+import React from 'react';
 
-export function Pagination({ currentPage, totalPages, onPageChange }) {
+export function Pagination( { currentPage, totalPages, onPageChange } ) {
     
-    const prevPage = () => handlePrevPage(currentPage, onPageChange);
-    const nextPage = () => handleNextPage(currentPage, totalPages, onPageChange)
-    const renderPageNumbers = () => handleRenderPageNumbers(currentPage, totalPages, onPageChange)
+    const prevPage = () => handlePrevPage( currentPage, onPageChange );
+    const nextPage = () => handleNextPage( currentPage, totalPages, onPageChange )
+    const renderPageNumbers = () => handleRenderPageNumbers( currentPage, totalPages, onPageChange )
 
     return (
         <div className="pagination">

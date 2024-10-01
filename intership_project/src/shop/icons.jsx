@@ -1,5 +1,7 @@
 import { VStack,IconButton,Text } from "@chakra-ui/react";
-export function Icons({ icon, label, onClick}) {
+import React from 'react';
+
+export function Icons( { icon, label, onClick } ) {
 
     return (
         <VStack ml={1} mr={1} h={12} onClick={onClick}>
