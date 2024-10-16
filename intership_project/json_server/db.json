@@ -186,18 +186,18 @@
       "color": "White"
     },
     {
-      "id": "15",
-      "title": "JBL Flip 5 Speaker",
-      "price": "359.85",
-      "quantity": "3",
-      "color": "Red"
-    },
-    {
       "id": "13",
       "title": "HP Envy 13 Laptop",
       "price": "2399.98",
       "quantity": "2",
       "color": "Silver"
+    },
+    {
+      "id": "20",
+      "title": "GoPro HERO9 Black",
+      "price": "1199.97",
+      "quantity": "3",
+      "color": "Black"
     }
   ]
 }

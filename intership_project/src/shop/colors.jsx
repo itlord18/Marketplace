@@ -1,4 +1,6 @@
-export function Colors({ color, index, handleColorChange, selectedColors }) {
+import React from 'react';
+
+export function Colors( { color, index, handleColorChange, selectedColors } ) {
 
     return (
         <label key={index}>
@@ -7,8 +9,8 @@ export function Colors({ color, index, handleColorChange, selectedColors }) {
             id={color} 
             name={color} 
             value={color}  
-            checked={selectedColors.includes(color)} 
-            onChange={() => handleColorChange(color)} 
+            checked={selectedColors.includes( color )} 
+            onChange={() => handleColorChange( color )} 
         /> 
         {color}
     </label>

@@ -1,4 +1,6 @@
-export function Types({ type, index, handleTypeChange, selectedTypes }) {
+import React from 'react';
+
+export function Types( { type, index, handleTypeChange, selectedTypes } ) {
     
     return (
         <label key={index}>
@@ -7,8 +9,8 @@ export function Types({ type, index, handleTypeChange, selectedTypes }) {
                 id={type} 
                 name={type} 
                 value={type} 
-                checked={selectedTypes.includes(type)} 
-                onChange={() => handleTypeChange(type)} 
+                checked={selectedTypes.includes( type )} 
+                onChange={() => handleTypeChange( type )} 
                 /> 
             {type}
         </label>

@@ -13,10 +13,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setQuantity, resetQuantity } from '../store/quantitySlice';
 import { Pagination } from "./pagination";
 import { Header } from "./header";
+import React from 'react';
 
 export function Shop() {
     const dispatch = useDispatch();
-    const quantity = useSelector((state) => state.quantity.quantity);
+    const quantity = useSelector( ( state ) => state.quantity.quantity );
 
     const {
         setSelectedColors, 
@@ -34,49 +35,49 @@ export function Shop() {
     
     const { products, productData, selectedProductId, setSelectedProductId, selectProduct, productsColors, productsTypes } = useProducts();
     const { basketData, basketProductData, productDataForBasket, selectedBasketProductId, handleAddToBasket, handleUpdateBasket, handleGetBasketProduct, setSelectedBasketProductId, handleDeleteProduct } = useBasket();
-    const [isBasketVisible, setIsBasketVisible] = useState(false);
+    const [ isBasketVisible, setIsBasketVisible ] = useState( false );
 
-    const isProductInBasket = basketData.some(item => item.id === selectedProductId);
+    const isProductInBasket = basketData.some( item => item.id === selectedProductId );
 
-    useEffect(() => {
-        if (selectedBasketProductId) {
-            setSelectedProductId(null);
+    useEffect( () => {
+        if ( selectedBasketProductId ) {
+            setSelectedProductId( null );
         }
-    }, [selectedBasketProductId]);
+    }, [ selectedBasketProductId ] );
 
     const inventory = selectedProductId ? productData.inventory : productDataForBasket.inventory;
     
     const handleQuantityChange = ( valueAsNumber ) => {
         const value = valueAsNumber || 1;
-        if (value >= 1 && value <= inventory) {
-            dispatch(setQuantity(value));
+        if ( value >= 1 && value <= inventory ) {
+            dispatch( setQuantity( value ) );
         }
     };
     
 
     const toggleBasketVisibility = () => {
-        setIsBasketVisible(!isBasketVisible);
-        if (!isBasketVisible) {
-            dispatch(resetQuantity()); 
+        setIsBasketVisible( !isBasketVisible );
+        if ( !isBasketVisible ) {
+            dispatch( resetQuantity() ); 
         }
     };
 
     const handleHomeClick = () => {
-        selectProduct(null);
-        setSelectedBasketProductId(null);
-        dispatch(resetQuantity());  
-        setSelectedTypes([]);
-        setSelectedColors([]);
-        setSort('');
-        setCurrentPage(1);
+        selectProduct( null );
+        setSelectedBasketProductId( null );
+        dispatch( resetQuantity() );  
+        setSelectedTypes( [] );
+        setSelectedColors( [] );
+        setSort( '' );
+        setCurrentPage( 1 );
         
     };
     
     
-    const totalPages = Math.ceil(products.length / itemsPerPage);
+    const totalPages = Math.ceil( products.length / itemsPerPage );
 
     const currentProducts = products.slice(
-        (currentPage - 1) * itemsPerPage,
+        ( currentPage - 1 ) * itemsPerPage,
         currentPage * itemsPerPage
     );
 
@@ -102,14 +103,14 @@ export function Shop() {
                         productsTypes={productsTypes}
                         selectedColors={selectedColors}
                         selectedTypes={selectedTypes}
-                        handleColorChange={(color) => handleElementChange(color, setSelectedColors)}
-                        handleTypeChange={(type) => handleElementChange(type, setSelectedTypes)}
+                        handleColorChange={( color ) => handleElementChange( color, setSelectedColors )}
+                        handleTypeChange={( type ) => handleElementChange( type, setSelectedTypes )}
                     />
                     
                     <div className='products'>
-                        {currentProducts.map(item => (
+                        {currentProducts.map( item => (
                             <ProductCard key={item.id} product={item} onSelect={selectProduct} />
-                        ))}
+                        ) )}
                         <Pagination
                             currentPage={currentPage}
                             totalPages={totalPages}
@@ -123,7 +124,7 @@ export function Shop() {
                     product={productData}
                     quantity={quantity}
                     onQuantityChange={handleQuantityChange}
-                    onAddToBasket={() => handleAddToBasket(productData.id, productData.title, parseFloat(quantity * productData.price).toFixed(2), quantity, productData.color)}
+                    onAddToBasket={() => handleAddToBasket( productData.id, productData.title, parseFloat( quantity * productData.price ).toFixed( 2 ), quantity, productData.color )}
                     isInBasket={isProductInBasket}
                 />
 
@@ -138,11 +139,11 @@ export function Shop() {
                 />
             )}
 
-            <div className="basket" style={isBasketVisible ? {backgroundColor: "aquamarine"} : {backgroundColor: "white"}}>
+            <div className="basket" style={isBasketVisible ? { backgroundColor: "aquamarine" } : { backgroundColor: "white" }}>
                 {isBasketVisible ? (
-                    basketData.length > 0 ? basketData.map(item => (
+                    basketData.length > 0 ? basketData.map( item => (
                         <BasketProductCard key={item.id} product={item} handleGetBasketProduct={handleGetBasketProduct} onDeleteProduct={handleDeleteProduct}/>
-                    )) : <p></p>
+                    ) ) : <p></p>
                 ) : null}
             </div>
             <div className="footer"></div>

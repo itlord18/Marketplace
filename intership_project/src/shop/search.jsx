@@ -1,5 +1,7 @@
 import { Input,IconButton, Flex } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
+import React from 'react';
+
 export function Search() {
 
     return (
@@ -7,8 +9,8 @@ export function Search() {
             <Input
                 type="text"
                 placeholder="Искать на Fable"
-                size={['md','md','lg']}
-                w={['md','md','lg']}
+                size={[ 'md','md','lg' ]}
+                w={[ 'md','md','lg' ]}
                 borderRadius="12px 0 0 12px"
                 borderRight="none"
                 borderColor='blue.500'
@@ -19,11 +21,11 @@ export function Search() {
             <IconButton
                 icon={<SearchIcon />}
                 aria-label="Поиск"
-                size={['md','md','lg']}
+                size={[ 'md','md','lg' ]}
                 bg="blue.500"
                 color="white"
                 borderRadius="0 12px 12px 0"
-                _hover={{bg:'blue.300',color:'white.700'}}
+                _hover={{ bg:'blue.300',color:'white.700' }}
             />
         </Flex>
     );

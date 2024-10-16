@@ -1,8 +1,9 @@
-import {Card,CardBody,CardFooter,Image,Stack,Heading,Text,Divider, Button} from '@chakra-ui/react'
+import { Card,CardBody,CardFooter,Image,Stack,Heading,Text,Divider, Button } from '@chakra-ui/react'
+import React from 'react';
 
-export function ProductCard({ product, onSelect }) {
+export function ProductCard( { product, onSelect } ) {
 
-    const {id, title, price, inventory} = product
+    const { id, title, price, inventory } = product
 
     return (
         
@@ -27,7 +28,7 @@ export function ProductCard({ product, onSelect }) {
         </CardBody>
         <Divider />
         <CardFooter>
-            <Button variant='solid' colorScheme='blue' onClick={() => onSelect(id)}>
+            <Button variant='solid' colorScheme='blue' onClick={() => onSelect( id )}>
               View here
             </Button>
         </CardFooter>

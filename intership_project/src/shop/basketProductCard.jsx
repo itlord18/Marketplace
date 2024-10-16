@@ -1,7 +1,8 @@
 import { Card, CardBody, CardFooter, Image, Stack, Heading, Text, Divider, Button, ButtonGroup, IconButton } from '@chakra-ui/react';
 import { DeleteIcon } from '@chakra-ui/icons';
+import React from 'react';
 
-export function BasketProductCard({ product, handleGetBasketProduct, onDeleteProduct }) {
+export function BasketProductCard( { product, handleGetBasketProduct, onDeleteProduct } ) {
     const { id, title, price, quantity } = product;
 
     return (
@@ -28,7 +29,7 @@ export function BasketProductCard({ product, handleGetBasketProduct, onDeletePro
                         flex={1} 
                         variant='solid'
                         colorScheme='blue'
-                        onClick={() => handleGetBasketProduct(id)}
+                        onClick={() => handleGetBasketProduct( id )}
                     >
                         View here
                     </Button>
@@ -38,8 +39,8 @@ export function BasketProductCard({ product, handleGetBasketProduct, onDeletePro
                         aria-label="Удалить"
                         bg='red.500'
                         color="white"
-                        _hover={{bg:'red.300',color:'white.700'}}
-                        onClick={() => onDeleteProduct(id)}
+                        _hover={{ bg:'red.300',color:'white.700' }}
+                        onClick={() => onDeleteProduct( id )}
                     />
                 </ButtonGroup>
             </CardFooter>
