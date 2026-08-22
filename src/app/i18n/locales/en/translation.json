@@ -1,0 +1,19 @@
+{
+  "addToBasketKey": "Add to basket",
+  "basketKey": "Basket",
+  "Catalog": "Catalog",
+  "changeOrderKey": "Order change",
+  "colorKey": "Color",
+  "deleteProductKey": "Delete product",
+  "favouritesKey": "Favourites",
+  "inventoryKey": "Inventory",
+  "loginKey": "Log in",
+  "orderPriceKey": "Order price",
+  "ordersKey": "Orders",
+  "priceKey": "Price",
+  "productAtBasketKey": "You have this product in the basket",
+  "quantityKey": "Quantity",
+  "searchKey": "Search at ",
+  "viewHereKey": "View here",
+  "yourOrderKey": "Your order"
+}

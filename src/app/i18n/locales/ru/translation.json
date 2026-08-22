@@ -1,0 +1,19 @@
+{
+  "addToBasketKey": "Добавить в корзину",
+  "basketKey": "Корзина",
+  "Catalog": "Каталог",
+  "changeOrderKey": "Изменение заказа",
+  "colorKey": "Цвет",
+  "deleteProductKey": "Удалить продукт",
+  "favouritesKey": "Избранное",
+  "inventoryKey": "На складе",
+  "loginKey": "Войти",
+  "orderPriceKey": "Стоимость заказа",
+  "ordersKey": "Заказы",
+  "priceKey": "Цена",
+  "productAtBasketKey": "У вас есть этот товар в корзине",
+  "quantityKey": "Количество",
+  "searchKey": "Искать на ",
+  "viewHereKey": "Посмотреть здесь",
+  "yourOrderKey": "Ваш заказ"
+}
