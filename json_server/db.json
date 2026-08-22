@@ -164,7 +164,7 @@
       "id": "21",
       "title": "Sony PlayStation 5",
       "price": 499.99,
-      "inventory": 0,
+      "inventory": 4,
       "type": "Electronics",
       "color": "White"
     },
@@ -179,25 +179,32 @@
   ],
   "basket": [
     {
-      "id": "2",
-      "title": "H&M T-Shirt White",
-      "price": "65.94",
-      "quantity": "6",
+      "id": "8",
+      "title": "Dell XPS 13 Laptop",
+      "price": 1999.98,
+      "quantity": 2,
       "color": "White"
     },
     {
-      "id": "13",
-      "title": "HP Envy 13 Laptop",
-      "price": "2399.98",
-      "quantity": "2",
-      "color": "Silver"
+      "id": "21",
+      "title": "Sony PlayStation 5",
+      "price": 499.99,
+      "quantity": 1,
+      "color": "White"
     },
     {
       "id": "20",
       "title": "GoPro HERO9 Black",
-      "price": "1199.97",
-      "quantity": "3",
+      "price": 1999.95,
+      "quantity": 5,
       "color": "Black"
+    },
+    {
+      "id": "2",
+      "title": "H&M T-Shirt White",
+      "price": 21.98,
+      "quantity": 2,
+      "color": "White"
     }
   ]
 }

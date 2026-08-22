@@ -1,0 +1,19 @@
+{
+  "addToBasketKey": "Dodaj do koszyka",
+  "basketKey": "Koszyk",
+  "Catalog": "Katalog",
+  "changeOrderKey": "Zmiana zamówienia",
+  "colorKey": "Kolor",
+  "deleteProductKey": "Usuń produkt",
+  "favouritesKey": "Ulubione",
+  "inventoryKey": "W magazynie",
+  "loginKey": "Zaloguj",
+  "orderPriceKey": "Cena zamówienia",
+  "ordersKey": "Zlecenia",
+  "priceKey": "Cena",
+  "productAtBasketKey": "Masz ten produkt w koszyku",
+  "quantityKey": "Ilość",
+  "searchKey": "Szukaj na ",
+  "viewHereKey": "Zobacz tutaj",
+  "yourOrderKey": "Twoje zamówienie"
+}
